@@ -8,6 +8,7 @@ public class movement : MonoBehaviour
     private float movespeed = 5f;
     public GameObject bulletPreFab;
     private int movingDirection;
+    private float bulletGraceTime = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,12 @@ public class movement : MonoBehaviour
             movingDirection = 4;
         }
         if (Input.GetMouseButtonDown(0)) {
-            spawnBullet();
+            bulletGraceTime -= Time.deltaTime;
+            if (bulletGraceTime < 1f)
+            {
+                spawnBullet();
+                bulletGraceTime = 2f;
+            }
         }
         
     }
